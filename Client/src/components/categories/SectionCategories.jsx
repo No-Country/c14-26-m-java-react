@@ -4,6 +4,7 @@ const SectionCategories = () => {
   return (
     <div className="w-[1440px] h-[271px] relative bg-neutral-50">
   <div className="pb-12 left-[286.50px] top-0 absolute flex-col justify-start items-center inline-flex">
+    {/* categorias */}
     <div className="justify-start items-start gap-[15px] inline-flex">
       <div className="w-[205px] h-[223px] relative">
         <div className="w-[205px] h-[223px] left-0 top-0 absolute">
