@@ -1,7 +1,8 @@
 package com.microservice.ecommerce.model;
 
-public enum ERol {
+public enum ERole {
 	
-	USER, ADMIN;
+	ADMIN, 
+	USER;
 
 }
