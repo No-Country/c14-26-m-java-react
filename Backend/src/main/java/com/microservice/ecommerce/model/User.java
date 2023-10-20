@@ -12,16 +12,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Table(name = "User", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }) })
+@Table(name = "User")
 public class User extends Catalogue implements UserDetails {
 
 	private String name;
