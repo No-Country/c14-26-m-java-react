@@ -1,32 +1,30 @@
-package com.microservice.ecommerce.model;
+package com.microservice.ecommerce.auth;
 
-import java.time.LocalDate;
+import com.microservice.ecommerce.model.Catalogue;
+import com.microservice.ecommerce.model.ERole;
 
-import jakarta.persistence.MappedSuperclass;
+public class RegisterRequest extends Catalogue {
 
-@MappedSuperclass
-public abstract class Person extends Catalogue {
-	
 	private String name;
 	private String lastName;
 	private String username;
 	private String password;
 	private String email;
-	private LocalDate birthday;
-	
-	public Person () {
-		
+	private ERole role;
+
+	public RegisterRequest() {
+
 	}
 
-	public Person(Long id, Boolean status, String name, String lastName, String username, String password, String email,
-			LocalDate birthday) {
+	public RegisterRequest(Long id, Boolean status, String name, String lastName, String username, String password,
+			String email, ERole role) {
 		super(id, status);
 		this.name = name;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
 		this.email = email;
-		this.birthday = birthday;
+		this.role = role;
 	}
 
 	public String getName() {
@@ -69,11 +67,12 @@ public abstract class Person extends Catalogue {
 		this.email = email;
 	}
 
-	public LocalDate getBirthday() {
-		return birthday;
+	public ERole getRole() {
+		return role;
 	}
 
-	public void setBirthday(LocalDate birthday) {
-		this.birthday = birthday;
+	public void setRole(ERole role) {
+		this.role = role;
 	}
+
 }

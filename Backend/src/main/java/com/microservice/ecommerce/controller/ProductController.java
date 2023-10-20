@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.microservice.ecommerce.model.Client;
 import com.microservice.ecommerce.model.Product;
 import com.microservice.ecommerce.repository.ProductRepository;
 import com.microservice.ecommerce.service.DatosListadoProduct;
