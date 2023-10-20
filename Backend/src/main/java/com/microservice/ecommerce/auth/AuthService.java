@@ -43,7 +43,8 @@ public class AuthService {
 
 	}
 
-	public AuthResponse register(RegisterRequest request) {
+	public AuthResponse register(RegisterRequest request) { 
+		 
 		User user = new User();
 		user.setName(request.getName());
 		user.setLastName(request.getLastName());
