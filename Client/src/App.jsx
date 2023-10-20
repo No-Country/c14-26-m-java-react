@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import Categories from "./pages/Categories/Categories"
 import Detail from "./pages/Detail/Detail"
 import Cart from "./pages/Cart/Cart"
+import Navbar from './components/navbar/Navbar';
 
 function App() {
   
@@ -11,6 +12,7 @@ function App() {
   return (
    <div>
      <Routes>
+     <Route path='/nav' element={<Navbar />}/>
       <Route path='/' element={<Home/>}/>
       <Route path='/categories' element={<Categories/>}/>
       {/* <Route path='/categories/:category' element={<Categories/>}/> */}
