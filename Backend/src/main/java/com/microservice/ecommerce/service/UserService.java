@@ -28,7 +28,7 @@ public class UserService {
 		ResponseEntity<String> response = null;
 		try {
 			Optional<User> existingUser = repository.findByUsername(user.getUsername());
-			if (existingUser.isPresent() && existingUser.get().getUsername().equals(user.getUsername())) {
+			if (existingUser.isPresent() && existingUser.get().getUsername().equals(user.getUsername()) && existingUser.get().getStatus()) {
 				response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username is already in use");
 			} else {
 				user.setStatus(Boolean.TRUE);
@@ -84,4 +84,30 @@ public class UserService {
 		return response;
 	}
 
+	public ResponseEntity<String> delete(Long id, User user) {
+		ResponseEntity<String> response = null;
+		try {
+			if (repository.existsByIdAndStatusTrue(id)) {
+				Errors result = new BeanPropertyBindingResult(user, "user");
+				if (!result.hasErrors()) {
+					user.setId(id);
+					user.setStatus(Boolean.FALSE);
+					user.setRole(ERole.USER);
+					user.setPassword(passwordEncoder.encode(user.getPassword()));
+					repository.save(user);
+					response = ResponseEntity.ok("user: " + user.getUsername() + " deleted succesfully");
+				} else {
+					response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error deleting user");
+				}
+			} else {
+				response = ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body("User with ID " + id + " not found or is inactive");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Failed to delete user: " + user.getUsername());
+		}
+		return response;
+	}
 }
