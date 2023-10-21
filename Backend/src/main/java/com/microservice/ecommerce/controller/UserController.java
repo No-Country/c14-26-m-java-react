@@ -37,5 +37,10 @@ public class UserController {
 	public ResponseEntity<String> update(@PathVariable Long id, @RequestBody User user) {
 		return service.update(id, user);
 	}
+	
+	@PutMapping("/delete/{id}")
+	public ResponseEntity<String> delete(@PathVariable Long id, @RequestBody User user) {
+		return service.delete(id, user);
+	}
 
 }
