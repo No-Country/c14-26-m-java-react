@@ -10,3 +10,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-custom {
+  background-image: url('./carusel.jpg');
+}
