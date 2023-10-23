@@ -84,5 +84,27 @@ public class Product extends Catalogue {
 	public void setDiscount(Boolean discount) {
 		this.discount = discount;
 	}
+
+	public void actualizarDatos(DatosActualizarProducto datosActualizarProducto) {
+		// TODO Auto-generated method stub
+		if(datosActualizarProducto.name() != null) {
+			this.name = datosActualizarProducto.name();
+		}
+		if(datosActualizarProducto.price() != null) {
+			this.price = datosActualizarProducto.price();
+		}
+		if(datosActualizarProducto.category() != null) {
+			this.category = datosActualizarProducto.category();
+		}
+		if(datosActualizarProducto.quantity() != null) {
+			this.quantity = datosActualizarProducto.quantity();
+		}
+		if(datosActualizarProducto.discount() != null) {
+			this.discount = datosActualizarProducto.discount();
+		}
+
+	}
+
+	
 	
 }
