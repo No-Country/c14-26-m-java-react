@@ -1,6 +1,7 @@
 import Navigation from '../../components/navigation/Navigation';
-//import CardProductDetail from '../../components/detail/CardProductDetail';
-import OtherProducts from '../../components/detail/OtherProducts';
+
+import OtherProducts from '../../components/Detail/OtherProducts';
+//import CardProductDetail from '../../components/Detail/CardProductDetail';
 
 
 const Detail = () => {
