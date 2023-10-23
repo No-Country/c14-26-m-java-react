@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import StarRating from './StarRating';
-import PropTypes from 'prop-types';
+
 
 
 // ¡POR EL MOMENTO!!!... Hago solicitud a la API para obtener un solo producto y actualizo el estado con el producto recibido
@@ -50,8 +50,5 @@ const CardProductDetail = () => {
   )
 }
 
-StarRating.propTypes = {
-    rating: PropTypes.number.isRequired,
-};
 
 export default CardProductDetail
