@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const StarRating = ({ rating }) => {
+const StarRating = () => {
     // const roundedRating = Math.round(rating.rate);   
   
     return (
