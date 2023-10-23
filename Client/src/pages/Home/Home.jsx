@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import '/src/App.css';
 import big from '/big.png'
@@ -14,10 +14,23 @@ import card6 from '/card6.png'
 import card7 from '/card7.png'
 import card8 from '/card8.png'
 import Footer from '../../components/footer/Footer';
+import { useNavigate } from 'react-router-dom';
+import { Context } from '../../context';
 
 
 
 const Home = () => {
+
+  const { getProductsFromCategory } = useContext(Context)
+  const navigate = useNavigate()
+
+  const menCategory = () => {
+    getProductsFromCategory("men's clothing")
+    scrollTo(0, 0)
+    navigate('/categories')
+  }
+
+
   return (
     <div>
       {/* <Navbar /> */}
@@ -50,7 +63,7 @@ const Home = () => {
         </div>
         <div className="flex flex-col md:flex-row gap-4 mt-[40px] w-full justify-center  items-center">
 
-          <div className="w-2/7">
+          <div className="w-2/7" onClick={menCategory}>
             <img src={big} alt="Men" className='object-cover w-[324px] h-[500px] md:h-[500px] md:w-[510px]' />
           </div>
 

@@ -6,12 +6,18 @@ export const Context = createContext()
 const ContexProvider = ({ children }) => {
 
     const [products, setProducts] = useState([])
+    const [product, setProduct] = useState([])
     const [categories, SetCategories] = useState([])
     const [categoryProd, setCategoryProd] = useState([])
 
     const getAllProducts = async () => {
         const productsAll = await getRequest('/products')
         setProducts(productsAll)
+    }
+
+    const getProductByID = async (id) => {
+        const productsByID = await getRequest(`/products/${id}`)
+        setProduct(productsByID)
     }
 
     const getAllCategories = async () => {
@@ -24,8 +30,11 @@ const ContexProvider = ({ children }) => {
         setCategoryProd(productsCategory)
     }
 
+
+
+
     return (
-        <Context.Provider value={{ products, getAllProducts, categories, getAllCategories, categoryProd, getProductsFromCategory }}>
+        <Context.Provider value={{ products, getAllProducts, categories, getAllCategories, categoryProd, getProductsFromCategory, getProductByID, product }}>
             {children}
         </Context.Provider>
     )

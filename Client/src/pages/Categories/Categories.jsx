@@ -8,12 +8,10 @@ import Navbar from '../../components/navbar/Navbar'
 const Categories = () => {
   return (
     <div className='flex flex-col items-center w-full'>
-      
-      <UbicationBar/>
-      <SectionCategories/>
-      <FilterBar/>
-      <ItemsList/>
-
+      <UbicationBar />
+      <SectionCategories />
+      <FilterBar />
+      <ItemsList />
     </div>
   )
 }

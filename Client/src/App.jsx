@@ -8,21 +8,21 @@ import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
 
 function App() {
-  
+
 
   return (
-   <>
-    <Navbar/>
-     <Routes>
-     {/* <Route path='/nav' element={<Navbar />}/> */}
-      <Route path='/' element={<Home/>}/>
-      <Route path='/categories' element={<Categories/>}/>
-      {/* <Route path='/categories/:category' element={<Categories/>}/> */}
-      <Route path='/detail' element={<Detail/>}/>
-      <Route path='/cart' element={<Cart/>}/>
-     </Routes>
-     <Footer />
-   </>
+    <>
+      <Navbar />
+      <Routes>
+        {/* <Route path='/nav' element={<Navbar />}/> */}
+        <Route path='/' element={<Home />} />
+        <Route path='/categories' element={<Categories />} />
+        {/* <Route path='/categories/:category' element={<Categories/>}/> */}
+        <Route path='/detail' element={<Detail />} />
+        <Route path='/cart' element={<Cart />} />
+      </Routes>
+      <Footer />
+    </>
   )
 }
 
