@@ -1,8 +1,12 @@
-import Navigation from '../../components/Detail/Navigation';
-import CardProductDetail from '../../components/Detail/CardProductDetail';
+import Navigation from '../../components/navigation/Navigation';
+
 import OtherProducts from '../../components/Detail/OtherProducts';
+
+import CardProductDetail from '../../components/Detail/CardProductDetail'
+
 import { useContext, useEffect } from 'react';
 import { Context } from '../../context';
+
 
 const Detail = () => {
 
@@ -15,10 +19,11 @@ const Detail = () => {
   console.log(product);
 
   return (
-    <div className='flex flex-col items-left ml-20 mr-20'>
-      <Navigation />
-      <CardProductDetail />
-      <OtherProducts />
+
+    <div className='flex flex-col ml-20 mr-20'>
+        <Navigation />
+        <CardProductDetail />
+        <OtherProducts />
     </div>
   )
 }
