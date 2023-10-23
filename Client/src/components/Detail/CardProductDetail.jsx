@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import StarRating from './StarRating';
+//import StarRating from './StarRating';
 
 
 
@@ -31,11 +31,11 @@ const CardProductDetail = () => {
                 {product && <img src={product.image} alt={product.title} className="max-w-[300px] ml-12 mr-12"/>}
                 </div>
                 {/* Contenido del lado derecho/ detalles del producto */}
-                <div className="w-1/2 lg:w-1/2 w-[340px]"> 
+                <div className="lg:w-1/2 w-[340px]"> 
                 {product && (
                     <div>
                         <h2 className="text-lg">{product.title}</h2>
-                        <StarRating rating={product.rating} />
+                        {/* <StarRating rating={product.rating} /> */}
                         <p className="text-lg my-2 font-bold mb-10">${product.price}</p>
                         <p className="text-sm my-3">Description:<br/>{product.description}</p>
                         <p className="text-sm my-3 border-b border-gray-300 pb-8 mb-5">Category:<br/>{product.category}</p>
