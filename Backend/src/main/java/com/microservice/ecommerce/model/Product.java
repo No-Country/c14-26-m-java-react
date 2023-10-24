@@ -102,6 +102,9 @@ public class Product extends Catalogue {
 		if(datosActualizarProducto.discount() != null) {
 			this.discount = datosActualizarProducto.discount();
 		}
+		if(datosActualizarProducto.images() != null) {
+			this.images = datosActualizarProducto.images();
+		}
 
 	}
 

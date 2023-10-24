@@ -54,7 +54,7 @@ public class ProductController {
 		return service.borrar(id);
 	}
 	
-	@PutMapping
+	@PutMapping("/update")
 	public ResponseEntity<String> actualizarProducto(@RequestBody DatosActualizarProducto datosActualizarProducto) {		
 		return service.update(datosActualizarProducto);
 	}

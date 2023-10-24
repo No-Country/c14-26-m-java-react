@@ -1,6 +1,6 @@
 package com.microservice.ecommerce.model;
 
-
+import java.util.List;
 
 public record DatosActualizarProducto(
 		Long id,
@@ -8,7 +8,8 @@ public record DatosActualizarProducto(
 		Double price,
 		Category category,
 		Integer quantity,
-		Boolean discount
+		Boolean discount,
+		List<String> images
 		) {
 
 }
