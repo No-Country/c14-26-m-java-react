@@ -10,8 +10,11 @@ import search from '/search.png'
 import cart from '/cart.png'
 import menu from '/menu.png'
 import { useState } from 'react';
+import { Link } from "react-router-dom";
+
 
 const Navbar = () => {
+    
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
     <div className=''>
@@ -52,7 +55,7 @@ const Navbar = () => {
             {/* Menú para móviles */}
             {isMobileMenuOpen && (
                 <div className='absolute top-[78px] left-0 w-full bg-white flex flex-col p-5 lg:hidden items-center'>
-                    <a href="#" className="text-custom-gray font-bold text-xl mb-3">Home</a>
+                    <a href="/" className="text-custom-gray font-bold text-xl mb-3">Home</a>
                     <a href="#" className="text-custom-gray font-bold text-xl mb-3">Shop</a>
                     <a href="#" className="text-custom-gray font-bold text-xl mb-3">About</a>
                     <a href="#" className="text-custom-gray font-bold text-xl mb-3">Blog</a>
@@ -63,11 +66,19 @@ const Navbar = () => {
 
             {/* Menú para escritorio */}
             <div className='hidden lg:flex'>
+                <Link to= "/">
                 <a href="#" className="text-custom-gray font-bold text-xl ml-28">Home</a>
+                </Link>
+                <Link to="/categories">
                 <a href="#" className="text-custom-gray font-bold text-xl ml-5">Shop</a>
+                </Link>
                 <a href="#" className="text-custom-gray font-bold text-xl ml-5">About</a>
                 <a href="#" className="text-custom-gray font-bold text-xl ml-5">Blog</a>
-                <a href="#" className="text-custom-gray font-bold text-xl ml-5">Contact</a>
+                <a href="#" onClick={(e) => {
+    e.preventDefault();
+    window.scrollTo(0, document.body.scrollHeight);
+}} className="text-custom-gray font-bold text-xl ml-5">Contact</a>
+
             </div>
         </div>
         <div className='hidden lg:flex items-center mr-16'>
