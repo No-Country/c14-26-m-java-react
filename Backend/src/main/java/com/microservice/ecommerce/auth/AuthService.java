@@ -43,7 +43,7 @@ public class AuthService {
 
 	}
 
-	public AuthResponse register(RegisterRequest request) { 
+	public AuthResponse register(RegisterRequest request) { // creacion de admin
 		 
 		User user = new User();
 		user.setName(request.getName());
@@ -51,7 +51,7 @@ public class AuthService {
 		user.setUsername(request.getUsername());
 		user.setPassword(passwordEncoder.encode(request.getPassword()));
 		user.setEmail(request.getEmail());
-		user.setRole(ERole.USER);
+		user.setRole(ERole.ADMIN);
 
 		userRepository.save(user);
 		AuthResponse authResponse = new AuthResponse();
