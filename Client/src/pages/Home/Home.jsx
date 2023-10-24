@@ -13,9 +13,12 @@ import card5 from '/card5.png'
 import card6 from '/card6.png'
 import card7 from '/card7.png'
 import card8 from '/card8.png'
+import ssd from '/ssd.jpg'
+import jewel from '/jewel.jpg'
 import Footer from '../../components/footer/Footer';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../../context';
+import caruselImage from '/carusel.jpg';
 
 
 
@@ -30,12 +33,30 @@ const Home = () => {
     navigate('/categories')
   }
 
+  const womenCategory = () => {
+    getProductsFromCategory("women's clothing")
+    scrollTo(0, 0)
+    navigate('/categories')
+  }
+
+  const electronicsCategory = () => {
+    getProductsFromCategory("electronics")
+    scrollTo(0, 0)
+    navigate('/categories')
+  }
+
+  const jeweleryCategory = () => {
+    getProductsFromCategory("jewelery")
+    scrollTo(0, 0)
+    navigate('/categories')
+  }
+
 
   return (
     <div>
       {/* <Navbar /> */}
       <div>
-        <div className="bg-custom bg-cover h-[716px] w-full">
+        <div className=" bg-cover h-[716px] w-full" style={{ backgroundImage: `url(${caruselImage})` }}>
           <div className='flex flex-col md:items-start md:ml-[200px] text-left lg:items-start'>
             <h3 className='text-white font-bold mt-[200px] md:mt-[200px] text-center md:text-left'>
               SUMMER 2020
@@ -68,19 +89,19 @@ const Home = () => {
           </div>
 
 
-          <div className="w-1/7">
+          <div className="w-1/7" onClick={womenCategory}>
             <img src={mid} alt="Women" className="object-cover w-[324px] h-[500px] md:h-[500px] md:w-[240px]" />
           </div>
 
 
           <div className="w-1/7 flex flex-col gap-4">
 
-            <div>
-              <img src={smallt} alt="Accessories" className="object-cover w-[324px] h-[500px] md:h-[240px] md:w-[240px]" />
+            <div onClick={electronicsCategory}>
+              <img src={ssd} alt="Accessories" className="object-cover w-[324px] h-[500px] md:h-[240px] md:w-[240px]" />
             </div>
 
-            <div>
-              <img src={smalld} alt="Kids" className="object-cover w-[324px] h-[500px] md:w-[240px] md:h-[240px]" />
+            <div onClick={jeweleryCategory}>
+              <img src={jewel} alt="Kids" className="object-cover w-[324px] h-[500px] md:w-[240px] md:h-[240px]" />
             </div>
           </div>
         </div>
