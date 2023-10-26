@@ -37,4 +37,14 @@ public class Category extends Catalogue {
 	public void setDetails(String details) {
 		this.details = details;
 	}
+
+	public void actualizarDatos(Category category) {
+		// TODO Auto-generated method stub
+		if(category.getName()!= null) {
+			this.name = category.name;
+		}
+		if(category.getDetails()!= null) {
+			this.details = category.details;
+		}
+	}
 }
