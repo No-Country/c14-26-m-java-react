@@ -39,7 +39,6 @@ public class Category extends Catalogue {
 	}
 
 	public void actualizarDatos(Category category) {
-		// TODO Auto-generated method stub
 		if(category.getName()!= null) {
 			this.name = category.name;
 		}

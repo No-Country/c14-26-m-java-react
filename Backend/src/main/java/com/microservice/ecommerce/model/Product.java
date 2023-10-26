@@ -13,36 +13,35 @@ import jakarta.persistence.Table;
 @Table(name = "Product")
 public class Product extends Catalogue {
 
-	private String name;
+	private String title;
 	private Double price;
 	@Column(length = 2048)
 	private List<String> images = new ArrayList<>();
 	@ManyToOne
 	@JoinColumn(name = "category_id") // foreing_key column name
 	private Category category;
-	private Integer quantity;
-	private Boolean discount;
+	@Column(length = 2048)
+	private String description;
 
 	public Product() {
 
 	}
 
-	public Product(String name, Double price, List<String> images, Category category, Integer quantity, Boolean discount) {
+	public Product(String title, Double price, List<String> images, Category category, String description) {
 		super();
-		this.name = name;
+		this.title = title;
 		this.price = price;
 		this.images = images;
 		this.category = category;
-		this.quantity = quantity;
-		this.discount = discount;
+		this.description = description;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Double getPrice() {
@@ -69,45 +68,32 @@ public class Product extends Catalogue {
 		this.category = category;
 	}
 
-	public Integer getQuantity() {
-		return quantity;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
-
-	public Boolean getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(Boolean discount) {
-		this.discount = discount;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public void actualizarDatos(DatosActualizarProducto datosActualizarProducto) {
-		// TODO Auto-generated method stub
-		if(datosActualizarProducto.name() != null) {
-			this.name = datosActualizarProducto.name();
+		
+		if (datosActualizarProducto.title() != null) {
+			this.title = datosActualizarProducto.title();
 		}
-		if(datosActualizarProducto.price() != null) {
+		if (datosActualizarProducto.price() != null) {
 			this.price = datosActualizarProducto.price();
 		}
-		if(datosActualizarProducto.category() != null) {
+		if (datosActualizarProducto.category() != null) {
 			this.category = datosActualizarProducto.category();
 		}
-		if(datosActualizarProducto.quantity() != null) {
-			this.quantity = datosActualizarProducto.quantity();
+		if (datosActualizarProducto.description() != null) {
+			this.description = datosActualizarProducto.description();
 		}
-		if(datosActualizarProducto.discount() != null) {
-			this.discount = datosActualizarProducto.discount();
-		}
-		if(datosActualizarProducto.images() != null) {
+		if (datosActualizarProducto.images() != null) {
 			this.images = datosActualizarProducto.images();
 		}
 
 	}
 
-	
-	
 }
