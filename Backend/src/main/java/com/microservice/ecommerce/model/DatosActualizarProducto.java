@@ -4,11 +4,10 @@ import java.util.List;
 
 public record DatosActualizarProducto(
 		Long id,
-		String name,
+		String title,
 		Double price,
 		Category category,
-		Integer quantity,
-		Boolean discount,
+		String description,
 		List<String> images
 		) {
 
