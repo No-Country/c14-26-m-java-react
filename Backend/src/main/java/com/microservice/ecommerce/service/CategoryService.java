@@ -10,13 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.microservice.ecommerce.model.Category;
-import com.microservice.ecommerce.model.Product;
 import com.microservice.ecommerce.repository.CategoryRepository;
 
 import jakarta.transaction.Transactional;
-
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.Errors;
 
 @Service
 public class CategoryService {
@@ -44,7 +40,6 @@ public class CategoryService {
 	}
 
 	public List<Category> findAll() {
-		// TODO Auto-generated method stub
 		List<Category> result = new ArrayList<>();
 		try {
 			result = repository.findAll();
@@ -56,7 +51,6 @@ public class CategoryService {
 
 	@Transactional
 	public ResponseEntity<String> update(Category category) {
-		// TODO Auto-generated method stub
 		ResponseEntity<String> response = null;
 		try {
 			Category categoryA = repository.getReferenceById(category.getId());
