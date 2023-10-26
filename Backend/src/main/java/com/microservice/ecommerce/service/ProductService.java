@@ -35,6 +35,7 @@ public class ProductService {
 	}
 	
 	
+	
 	public ResponseEntity<Page<DatosListadoProduct>> listar(@PageableDefault(size= 2) Pageable paginacion){//el pageable llega del frontend
 				
 		return ResponseEntity.ok(repository.findByStatusTrue(paginacion).map(DatosListadoProduct:: new ));
