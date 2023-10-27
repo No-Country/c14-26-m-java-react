@@ -21,7 +21,10 @@ public class Ticket extends Catalogue {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	@ManyToMany
-	@JoinTable(name = "ticket_product", joinColumns = @JoinColumn(name = "ticket_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+	@JoinTable(
+	        name = "ticket_product",
+	        joinColumns = @JoinColumn(name = "ticket_id"),
+	        inverseJoinColumns = @JoinColumn(name = "product_id"))
 	private List<Product> products = new ArrayList<>();
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_id")
