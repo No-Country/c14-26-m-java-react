@@ -5,14 +5,9 @@ import Swal from 'sweetalert2';
 const CardProductDetail = () => {
   const { getProductByID, product, cart, addCart } = useContext(Context);
 
-  useEffect(() => {
-
-    const resetProduct = () => {                       // limpio el estado del producto
-      getProductByID(-1);                              // -1 ---> estado inicial vacío
-    };
-    resetProduct();                                    // Limpio el estado antes de cargar un nuevo detalle
-    scrollTo(0, 0)
-  }, []);
+  useEffect(() => {       
+    scrollTo(0, 0);                                    
+  }, [getProductByID]);
 
   const renderRating = () => {
     if (!product || !product.rating) {
@@ -51,18 +46,18 @@ const CardProductDetail = () => {
 
   return (
     <div className="container mx-auto h-screen flex flex-col items-center">
-      <div className="bg-white rounded-lg p-4 mb-8">
-        <div className="flex flex-wrap justify-center items-center space-x-2">
+      <div className="bg-white rounded-lg p-4">
+        <div className="flex flex-wrap justify-center items-center space-x-1">
           {/* Contenido del lado izq./ imagen del producto */}
           <div>
-            {product && <img src={product.image} alt={product.title} className="max-w-[300px] ml-12 mr-12" />}
+            {product && <img src={product.image} alt={product.title} style={{ maxHeight: "360px" }} className="max-w-[400px] ml-12 mr-12" />}
           </div>
           {/* Contenido del lado derecho/ detalles del producto */}
-          <div className="lg:w-1/2 w-[340px]">
+          <div className="lg:w-1/2 w-[340px]" style={{ maxHeight: "800px" }}>
             {product && (
               <div>
                 <h2 className="text-lg">{product.title}</h2>
-                {renderRating()} {/* Llamo a la función para mostrar el rating */}
+                {renderRating()}
                 <p className="text-lg my-2 font-bold mb-10">${product.price}</p>
                 <p className="text-sm my-3">Description:<br />{product.description}</p>
                 <p className="text-sm my-3 border-b border-gray-300 pb-8 mb-5">Category:<br />{product.category}</p>
