@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import { getRequest } from '../../services/httpRequests';
 
 
-
 const Home = () => {
 
   const { getProductsFromCategory } = useContext(Context);
@@ -31,13 +30,8 @@ const Home = () => {
   }, []); 
 
   const navigate = useNavigate()
-
-  const menCategory = () => {
-    getProductsFromCategory("men's clothing")
-    scrollTo(0, 0)
-    navigate('/categories')
-  }
-
+  
+  
   const selectRandomProducts = (currentProductId, count = 8) => {
     const filteredProducts = products.filter(product => product.id !== currentProductId);
     const randomProducts = [];
@@ -55,10 +49,36 @@ const Home = () => {
   console.log(otherProducts)
 
 
+  const menCategory = () => {
+    getProductsFromCategory("men's clothing")
+    scrollTo(0, 0)
+    navigate('/categories')
+  }
+
+  const womenCategory = () => {
+    getProductsFromCategory("women's clothing")
+    scrollTo(0, 0)
+    navigate('/categories')
+  }
+
+  const electronicsCategory = () => {
+    getProductsFromCategory("electronics")
+    scrollTo(0, 0)
+    navigate('/categories')
+  }
+
+  const jeweleryCategory = () => {
+    getProductsFromCategory("jewelery")
+    scrollTo(0, 0)
+    navigate('/categories')
+  }
+
+
+
   return (
     <div >
       <div>
-        <div className="bg-custom bg-cover h-[716px] w-full">
+        <div className=" bg-cover h-[716px] w-full" style={{ backgroundImage: `url(${caruselImage})` }}>
           <div className='flex flex-col md:items-start md:ml-[200px] text-left lg:items-start'>
             <h3 className='text-white font-bold mt-[200px] md:mt-[200px] text-center md:text-left'>
               SUMMER 2020
@@ -91,19 +111,19 @@ const Home = () => {
           </div>
 
 
-          <div className="w-1/7">
+          <div className="w-1/7" onClick={womenCategory}>
             <img src={mid} alt="Women" className="object-cover w-[324px] h-[500px] md:h-[500px] md:w-[240px]" />
           </div>
 
 
           <div className="w-1/7 flex flex-col gap-4">
 
-            <div>
-              <img src={smallt} alt="Accessories" className="object-cover w-[324px] h-[500px] md:h-[240px] md:w-[240px]" />
+            <div onClick={electronicsCategory}>
+              <img src={ssd} alt="Accessories" className="object-cover w-[324px] h-[500px] md:h-[240px] md:w-[240px]" />
             </div>
 
-            <div>
-              <img src={smalld} alt="Kids" className="object-cover w-[324px] h-[500px] md:w-[240px] md:h-[240px]" />
+            <div onClick={jeweleryCategory}>
+              <img src={jewel} alt="Kids" className="object-cover w-[324px] h-[500px] md:w-[240px] md:h-[240px]" />
             </div>
           </div>
         </div>

@@ -1,8 +1,9 @@
 import { useEffect, useContext } from 'react';
 import { Context } from '../../context';
+import Swal from 'sweetalert2';
 
 const CardProductDetail = () => {
-  const { getProductByID, product } = useContext(Context);
+  const { getProductByID, product, cart, addCart } = useContext(Context);
 
   useEffect(() => {       
     scrollTo(0, 0);                                    
@@ -14,6 +15,8 @@ const CardProductDetail = () => {
     }
 
     const roundedRating = Math.round(product.rating.rate);
+
+
 
     return (
       <div className="flex items-center">
@@ -32,6 +35,15 @@ const CardProductDetail = () => {
     );
   };
 
+  const AddCartConfirm = () => {
+    Swal.fire(
+      'buen Trabajo!',
+      'Producto Agregado con exito!',
+      'success'
+    )
+    addCart({...product, cantidad: 1})
+  }
+
   return (
     <div className="container mx-auto h-screen flex flex-col items-center">
       <div className="bg-white rounded-lg p-4">
@@ -47,9 +59,11 @@ const CardProductDetail = () => {
                 <h2 className="text-lg">{product.title}</h2>
                 {renderRating()}
                 <p className="text-lg my-2 font-bold mb-10">${product.price}</p>
-                <p className="text-sm my-3">Description:<br/>{product.description}</p>
-                <p className="text-sm my-3 border-b border-gray-300 pb-8 mb-5">Category:<br/>{product.category}</p>
-                <button className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5 mb-5">Add Cart</button>
+                <p className="text-sm my-3">Description:<br />{product.description}</p>
+                <p className="text-sm my-3 border-b border-gray-300 pb-8 mb-5">Category:<br />{product.category}</p>
+                <button className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5 mb-5"
+                  onClick={AddCartConfirm}
+                >Add Cart</button>
               </div>
             )}
           </div>
