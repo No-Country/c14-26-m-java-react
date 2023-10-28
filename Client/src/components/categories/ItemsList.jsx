@@ -1,15 +1,3 @@
-import men1 from '../../assets/images/imagesmuestra/men1.png'
-import women1 from '../../assets/images/imagesmuestra/women1.png'
-import women2 from '../../assets/images/imagesmuestra/women2.png'
-import men2 from '../../assets/images/imagesmuestra/men2.png'
-import men3 from '../../assets/images/imagesmuestra/men3.png'
-import kids1 from '../../assets/images/imagesmuestra/kids1.png'
-import men4 from '../../assets/images/imagesmuestra/men4.png'
-import women3 from '../../assets/images/imagesmuestra/woman3.png'
-import men5 from '../../assets/images/imagesmuestra/men5.png'
-import men6 from '../../assets/images/imagesmuestra/men6.png'
-import men7 from '../../assets/images/imagesmuestra/men7.png'
-import women4 from '../../assets/images/imagesmuestra/women4.png'
 import { useContext, useEffect } from 'react';
 import { Context } from '../../context';
 import { useNavigate } from 'react-router-dom';
@@ -31,10 +19,7 @@ const ItemsList = () => {
             {
                 categoryProd.length === 0 ?
                     products.map(product => (
-                        <div className="w-[238px] flex-col justify-start items-center inline-flex"
-                             key={product.id}
-                             onClick={() => navigate(`/detail/${product.id}`)} 
-                        >
+                        <div className="w-[238px] flex-col justify-start items-center inline-flex" key={product.id} onClick={() => navigate(`/detail/${product.id}`)} >
 
                             <div className="h-[488px] bg-white flex-col justify-start items-start flex">
                                 <div className="w-[239px] h-[300px] relative">
@@ -61,7 +46,7 @@ const ItemsList = () => {
                     :
 
                     categoryProd.map(product => (
-                        <div className="w-[238px] flex-col justify-start items-center inline-flex" key={product.id}>
+                        <div className="w-[238px] flex-col justify-start items-center inline-flex" key={product.id} onClick={() => navigate(`/detail/${product.id}`)} >
                             <div className="h-[488px] bg-white flex-col justify-start items-start flex">
                                 <div className="w-[239px] h-[300px] relative">
                                     <img className="w-[239px] h-[300px] left-0 top-0 absolute object-contain" src={product.image} />
