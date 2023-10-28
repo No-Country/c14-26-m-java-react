@@ -1,12 +1,24 @@
 import { useContext, useEffect, useState } from 'react'
-//import Navbar from '../../components/navbar/Navbar'
+import Navbar from '../../components/navbar/Navbar'
 import '/src/App.css';
 import big from '/big.png'
 import mid from '/mid.png'
 import smalld from '/smalld.png'
 import smallt from '/smallt.png'
+import card1 from '/card1.png'
+import card2 from '/card2.png'
+import card3 from '/card3.png'
+import card4 from '/card4.png'
+import card5 from '/card5.png'
+import card6 from '/card6.png'
+import card7 from '/card7.png'
+import card8 from '/card8.png'
+import ssd from '/ssd.jpg'
+import jewel from '/jewel.jpg'
+import Footer from '../../components/footer/Footer';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../../context';
+import caruselImage from '/carusel.jpg';
 import PropTypes from 'prop-types';
 import { getRequest } from '../../services/httpRequests';
 
