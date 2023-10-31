@@ -14,11 +14,10 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        {/* <Route path='/nav' element={<Navbar />}/> */}
         <Route path='/' element={<Home />} />
         <Route path='/categories' element={<Categories />} />
         {/* <Route path='/categories/:category' element={<Categories/>}/> */}
-        <Route path='/detail' element={<Detail />} />
+        <Route path='/detail/:id' element={<Detail />} />
         <Route path='/cart' element={<Cart />} />
       </Routes>
       <Footer />
