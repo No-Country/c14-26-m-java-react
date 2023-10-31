@@ -36,9 +36,21 @@ const CardProductDetail = () => {
   };
 
   const AddCartConfirm = () => {
+
+    let index = cart.findIndex(item => item.id === product.id)
+    
+     if (index > -1) {
+      Swal.fire(
+        'Atention!',
+        'This Product is already added!',
+        'warning'
+      )
+      return
+     }
+     
     Swal.fire(
-      'buen Trabajo!',
-      'Producto Agregado con exito!',
+      'Good!',
+      'Product add in Cart!',
       'success'
     )
     addCart({...product, cantidad: 1})

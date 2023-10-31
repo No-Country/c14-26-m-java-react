@@ -1,38 +1,40 @@
 import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import Navbar from '../../components/navbar/Navbar';
-import Footer from '../../components/footer/Footer';
 import Navigation from '../../components/navigation/Navigation';
 import { Context } from '../../context';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
 
 const Cart = () => {
-  const { cart, updateCartItem, calculateCartTotal } = useContext(Context);
+  const { cart, updateCartItem, calculateCartTotal, borrarCart } = useContext(Context);
+  const navigate = useNavigate()
+  const totalt = calculateCartTotal();
+  function generarMensajeDeWhatsApp(compras) {
+    let mensaje = "Hola, quisiera realizar un pedido. añadiré estos productos \n Detalles de las compras:\n";
+    for (const compra of compras) {
+      mensaje += `
+      Producto: ${compra.title}
+      Precio: $${compra.price}
+      Cantidad: ${compra.cantidad}\n\n`;
+    }
+    return mensaje + `Total: $${totalt}`;
+  }
 
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [total, setTotal] = useState(0);
-  const [quantity, setQuantity] = useState(1);
-
-  useEffect(() => {
-    axios.get('https://fakestoreapi.com/products/1')
-      .then(response => {
-        setSelectedProduct(response.data);
-      })
-      .catch(error => {
-        console.error('Error getting the product', error);
-      });
-  }, []);
+  function compartirComprasEnWhatsApp(numeroDeTelefono) {
+    const mensaje = generarMensajeDeWhatsApp(cart);
+    const url = `https://api.whatsapp.com/send?phone=${numeroDeTelefono}&text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
+  }
 
   const handleAddToCart = () => {
 
     Swal.fire({
-      title: 'Desea Confirmar la compra?',
-      text: "Si acepta no podrá volver atras!",
+      title: 'You want to confirm the purchase?',
+      text: "If accepted, you will not be able to go back.!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Deseo confirmar'
+      confirmButtonText: 'Yes, Confirm'
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire(
@@ -40,12 +42,17 @@ const Cart = () => {
           'Redirigiendo al registro de pago.',
           'success'
         )
+
+        compartirComprasEnWhatsApp('+51916804077')
+        borrarCart()
+        localStorage.removeItem('cart')
+        navigate('/')
       }
     })
 
   };
 
-  const totalt = calculateCartTotal();
+
 
   return (
     <div>
@@ -74,7 +81,7 @@ const Cart = () => {
                         />
                         <p className="text-base font-semibold">{item.title}</p>
                       </div>
-                      <div className="flex items-center">
+                      <div className="flex items-center w-[171px] ">
                         <button
                           onClick={() => updateCartItem(item.id, -1)}
                           className="text-black p-1 rounded-full mr-2"
@@ -88,7 +95,7 @@ const Cart = () => {
                         >
                           +
                         </button>
-                        <p className="text-base ml-2">${item.price}</p>
+                        <p className="text-base ml-2 w-[51px]">${item.price}</p>
                         <p className="text-base ml-2">${item.price * item.cantidad}</p>
                       </div>
                     </div>
