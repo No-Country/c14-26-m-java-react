@@ -10,8 +10,28 @@ import search from '/search.png'
 import cart from '/cart.png'
 import menu from '/menu.png'
 import { useState } from 'react';
+import { Link } from "react-router-dom";
+import Login from "../login/Login"
+import Register from "../register/Register"
+
 
 const Navbar = () => {
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const openLogin = () => {
+    setIsLoginOpen(true);
+    setIsRegisterOpen(false);
+  };
+
+  const closeLogin = () => setIsLoginOpen(false);
+
+  const openRegister = () => {
+    setIsRegisterOpen(true);
+    setIsLoginOpen(false);
+  };
+
+  const closeRegister = () => setIsRegisterOpen(false);
+ 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
     <div className=''>
@@ -41,38 +61,54 @@ const Navbar = () => {
      </div>
     </div>
     <div className='h-[78px] w-full flex justify-between items-center'>
-        <div className='flex items-center h-full ml-8 justify-center'>
+        <div className='flex items-center h-full ml-8 md:justify-center'>
             <h1 className='font-bold text-[24px] lg:mr-28'>BrandName</h1>
 
             {/* Icono de hamburguesa solo visible en móviles */}
             <div className='lg:hidden mr-5 cursor-pointer' onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-                <img src={menu} alt='menu' className='h-[14px] w-[24px]' />
+                <img src={menu} alt='menu' className='h-[14px] w-[24px] ml-[160px]' />
             </div>
 
             {/* Menú para móviles */}
             {isMobileMenuOpen && (
                 <div className='absolute top-[78px] left-0 w-full bg-white flex flex-col p-5 lg:hidden items-center'>
-                    <a href="#" className="text-custom-gray font-bold text-xl mb-3">Home</a>
+                  <Link to= "/">
+                    <a href="/" className="text-custom-gray font-bold text-xl mb-3">Home</a>
+                  </Link>
+                  <Link to="/categories">
                     <a href="#" className="text-custom-gray font-bold text-xl mb-3">Shop</a>
+                  </Link>
                     <a href="#" className="text-custom-gray font-bold text-xl mb-3">About</a>
                     <a href="#" className="text-custom-gray font-bold text-xl mb-3">Blog</a>
-                    <a href="#" className="text-custom-gray font-bold text-xl mb-3">Contact</a>
-                    <button className='text-custom-sky-blue '>Login / register</button>
+                    <a href="#" className="text-custom-gray font-bold text-xl mb-3" >Contact</a>
+                    <button onClick={openLogin} className='text-custom-sky-blue '>Login / register</button>
+                    <Login show={isLoginOpen} onClose={closeLogin} onOpenRegister={openRegister} />
+                    <Register show={isRegisterOpen} onClose={closeRegister} onOpenLogin={openLogin} />
                 </div>
             )}
 
             {/* Menú para escritorio */}
             <div className='hidden lg:flex'>
+                <Link to= "/">
                 <a href="#" className="text-custom-gray font-bold text-xl ml-28">Home</a>
+                </Link>
+                <Link to="/categories">
                 <a href="#" className="text-custom-gray font-bold text-xl ml-5">Shop</a>
+                </Link>
                 <a href="#" className="text-custom-gray font-bold text-xl ml-5">About</a>
                 <a href="#" className="text-custom-gray font-bold text-xl ml-5">Blog</a>
-                <a href="#" className="text-custom-gray font-bold text-xl ml-5">Contact</a>
+                <a href="#" onClick={(e) => {
+    e.preventDefault();
+    window.scrollTo(0, document.body.scrollHeight);
+}} className="text-custom-gray font-bold text-xl ml-5">Contact</a>
+
             </div>
         </div>
         <div className='hidden lg:flex items-center mr-16'>
             <img src={login} alt='login' className='h-[12] w-[12] mr-1'/>
-            <button className='text-custom-sky-blue mr-8 font-bold'>Login / register</button>
+            <button onClick={openLogin} className='text-custom-sky-blue mr-8 font-bold'>Login / register</button>
+            <Login show={isLoginOpen} onClose={closeLogin} onOpenRegister={openRegister} />
+            <Register show={isRegisterOpen} onClose={closeRegister} onOpenLogin={openLogin}/>
             <img src={search} alt='search' className='h-[16] w-[16] mr-8' /> 
             <img src={cart} alt='search' className='h-[16] w-[16]' /> 
         </div>

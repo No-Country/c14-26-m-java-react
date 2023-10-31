@@ -14,3 +14,7 @@
 .bg-custom {
   background-image: url('./carusel.jpg');
 }
+
+html {
+  scroll-behavior: smooth;
+}

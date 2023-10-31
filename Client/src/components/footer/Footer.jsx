@@ -61,14 +61,13 @@
 
 // export default Footer
 
-import React from 'react'
 import facebook from '/facebook.png'
 import instagram from '/instagram.png'
 import twitter from '/twitter.png'
 
 const Footer = () => {
   return (
-    <div>
+    <div className='mt-14'>
         <div className='ml-5 sm:ml-0 w-full justify-around flex flex-col sm:flex-row mb-[100px]'>
     <p className='font-bold text-2xl mb-4 sm:mb-0'>
         Bandage
