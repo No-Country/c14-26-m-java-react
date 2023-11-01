@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Register from '../register/Register'
 import { useState } from 'react';
 import axios from 'axios';
+import { Context } from '../../context';
+
+
+
 
 const Login = ({ show, onClose, onOpenRegister }) => {
+  const {token, saveToken,isLoginOpen, setIsLoginOpen,saveName,name} = useContext(Context)
+  
   if (!show) {
     return null;
   }
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
 
@@ -24,10 +30,13 @@ const Login = ({ show, onClose, onOpenRegister }) => {
     }
  
     axios.post('https://ecommerce-nocountry.fly.dev/auth/login', data)
-    .then(res => console.log(res.data))
+    .then(res => {saveToken(res.data.token)
+    setIsLoginOpen(false)
+    return res
+    })
+    .then(res => {saveName(res.data.username)})
     .catch(err=> console.log(err))
   }
-
   return (
     <form onSubmit={postLogin}>
       <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">

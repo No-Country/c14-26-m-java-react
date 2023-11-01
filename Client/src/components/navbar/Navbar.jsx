@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import phone from '/phone.png'
 import mail from '/mail.png'
 import instagram from '/instagram.png'
@@ -13,15 +13,24 @@ import { useState } from 'react';
 import { Link } from "react-router-dom";
 import Login from "../login/Login"
 import Register from "../register/Register"
+import { Context } from '../../context'
+
 
 
 const Navbar = () => {
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const {token, saveToken,isLoginOpen, setIsLoginOpen, isRegisterOpen, setIsRegisterOpen,saveName,name} = useContext(Context)
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const openLogin = () => {
     setIsLoginOpen(true);
     setIsRegisterOpen(false);
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    saveToken(null);
+    saveName(null);
+    setIsUserMenuOpen(false);
+};
 
   const closeLogin = () => setIsLoginOpen(false);
 
@@ -81,7 +90,12 @@ const Navbar = () => {
                     <a href="#" className="text-custom-gray font-bold text-xl mb-3">About</a>
                     <a href="#" className="text-custom-gray font-bold text-xl mb-3">Blog</a>
                     <a href="#" className="text-custom-gray font-bold text-xl mb-3" >Contact</a>
-                    <button onClick={openLogin} className='text-custom-sky-blue '>Login / register</button>
+                    {
+                      token ? <p className='text-custom-sky-blue'>
+                        logeado
+                      </p>:
+                      <button onClick={openLogin} className='text-custom-sky-blue '>Login / register</button>
+                    }
                     <Login show={isLoginOpen} onClose={closeLogin} onOpenRegister={openRegister} />
                     <Register show={isRegisterOpen} onClose={closeRegister} onOpenLogin={openLogin} />
                 </div>
@@ -106,7 +120,32 @@ const Navbar = () => {
         </div>
         <div className='hidden lg:flex items-center mr-16'>
             <img src={login} alt='login' className='h-[12] w-[12] mr-1'/>
-            <button onClick={openLogin} className='text-custom-sky-blue mr-8 font-bold'>Login / register</button>
+            {
+    token ? (
+        <div className="relative">
+            <button 
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)} 
+                className='text-custom-sky-blue mr-2 font-bold'
+            >
+                {name}
+            </button>
+            {isUserMenuOpen && (
+                <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
+                    <a 
+                        href="#" 
+                        onClick={handleLogout} 
+                        className="block px-4 py-2 text-sm font-bold text-custom-sky-blue hover:bg-gray-100"
+                    >
+                        Log out
+                    </a>
+                </div>
+            )}
+        </div>
+    ) : (
+        <button onClick={openLogin} className='text-custom-sky-blue mr-8 font-bold'>Login / register</button>
+    )
+}
+            
             <Login show={isLoginOpen} onClose={closeLogin} onOpenRegister={openRegister} />
             <Register show={isRegisterOpen} onClose={closeRegister} onOpenLogin={openLogin}/>
             <img src={search} alt='search' className='h-[16] w-[16] mr-8' /> 
