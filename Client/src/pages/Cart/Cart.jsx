@@ -3,6 +3,7 @@ import Navigation from '../../components/navigation/Navigation';
 import { Context } from '../../context';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 
 const Cart = () => {
   const { cart, updateCartItem, calculateCartTotal, borrarCart } = useContext(Context);
@@ -27,6 +28,15 @@ const Cart = () => {
 
   const handleAddToCart = () => {
 
+    if (cart.length === 0) {
+      Swal.fire(
+        'Warning!',
+        'Your cart is empty.',
+        'error'
+      )
+      return
+    }
+
     Swal.fire({
       title: 'You want to confirm the purchase?',
       text: "If accepted, you will not be able to go back.!",
@@ -43,17 +53,33 @@ const Cart = () => {
           'success'
         )
 
-        compartirComprasEnWhatsApp('+51916804077')
-        borrarCart()
-        localStorage.removeItem('cart')
-        navigate('/')
+        // compartirComprasEnWhatsApp('+51916804077')
+        axios.post('https://pago-stripe.vercel.app/create-checkout-session', cart)
+          .then(res => {
+            
+              borrarCart()
+              localStorage.removeItem('cart')
+              navigate('/')
+              window.location.href = `${res.data.url}`
+            
+
+          })
+          .catch(err => {
+            console.log(err);
+            Swal.fire(
+              'Warning!',
+              'eror server.',
+              'error'
+            )
+          })
+
       }
     })
 
   };
 
 
-
+  console.log(cart);
   return (
     <div>
 
@@ -111,7 +137,7 @@ const Cart = () => {
                 <p>Subtotal: {totalt}</p>
                 <p>Discount: $0.00</p>
                 <p>Shipping Costs: $0.00</p>
-                <button className="bg-blue-500 text-white p-2 mt-4 rounded-md w-full" onClick={handleAddToCart}>Checkout: {totalt}</button>
+                <button className="bg-blue-500 text-white p-2 mt-4 rounded-md w-full" onClick={handleAddToCart}>Checkout: {totalt.toFixed(2)}</button>
               </div>
 
             </div>
