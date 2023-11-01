@@ -91,11 +91,30 @@ const Navbar = () => {
                     <a href="#" className="text-custom-gray font-bold text-xl mb-3">Blog</a>
                     <a href="#" className="text-custom-gray font-bold text-xl mb-3" >Contact</a>
                     {
-                      token ? <p className='text-custom-sky-blue'>
-                        logeado
-                      </p>:
-                      <button onClick={openLogin} className='text-custom-sky-blue '>Login / register</button>
-                    }
+    token ? (
+        <div className="relative">
+            <button 
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)} 
+                className='text-custom-sky-blue mr-2 font-bold'
+            >
+                {name}
+            </button>
+            {isUserMenuOpen && (
+                <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
+                    <a 
+                        href="#" 
+                        onClick={handleLogout} 
+                        className="block px-4 py-2 text-sm font-bold text-custom-sky-blue hover:bg-gray-100"
+                    >
+                        Log out
+                    </a>
+                </div>
+            )}
+        </div>
+    ) : (
+        <button onClick={openLogin} className='text-custom-sky-blue mr-8 font-bold'>Login / register</button>
+    )
+}
                     <Login show={isLoginOpen} onClose={closeLogin} onOpenRegister={openRegister} />
                     <Register show={isRegisterOpen} onClose={closeRegister} onOpenLogin={openLogin} />
                 </div>
