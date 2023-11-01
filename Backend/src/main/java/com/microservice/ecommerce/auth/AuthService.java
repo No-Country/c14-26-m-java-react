@@ -39,11 +39,13 @@ public class AuthService {
 		String token = jwtService.getToken(user);
 		AuthResponse authResponse = new AuthResponse();
 		authResponse.setToken(token);
+		String username = user.getUsername();
+		authResponse.setUsername(username);
 		return authResponse;
 
 	}
 
-	public AuthResponse register(RegisterRequest request) { // creacion de admin
+	public AuthResponse register(RegisterRequest request) { 
 		 
 		User user = new User();
 		user.setName(request.getName());
@@ -51,12 +53,12 @@ public class AuthService {
 		user.setUsername(request.getUsername());
 		user.setPassword(passwordEncoder.encode(request.getPassword()));
 		user.setEmail(request.getEmail());
-		user.setRole(ERole.ADMIN);
+		user.setRole(ERole.USER);
 
 		userRepository.save(user);
 		AuthResponse authResponse = new AuthResponse();
 		authResponse.setToken(jwtService.getToken(user));
-
+		authResponse.setUsername(user.getUsername());
 		return authResponse;
 	}
 
