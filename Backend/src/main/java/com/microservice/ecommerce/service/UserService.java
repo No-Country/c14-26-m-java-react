@@ -13,8 +13,10 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 
 import com.microservice.ecommerce.model.ERole;
+import com.microservice.ecommerce.model.SendMail;
 import com.microservice.ecommerce.model.User;
 import com.microservice.ecommerce.repository.UserRepository;
+import com.resend.core.exception.ResendException;
 
 @Service
 public class UserService {
@@ -23,19 +25,25 @@ public class UserService {
 	private UserRepository repository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
+	
+	private SendMail sendMail = new SendMail();;
+	
 	public ResponseEntity<String> save(User user) {
 		ResponseEntity<String> response = null;
+		String mensaje= "Hello, this is a confirmation email";
 		try {
 			Optional<User> existingUser = repository.findByUsername(user.getUsername());
+			
 			if (existingUser.isPresent() && existingUser.get().getUsername().equals(user.getUsername())) {
 				response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username is already in use");
 			} else {
+				
 				user.setStatus(Boolean.TRUE);
 				user.setPassword(passwordEncoder.encode(user.getPassword()));
 				user.setRole(ERole.USER);
 				User newUser = repository.save(user);
 				response = ResponseEntity.ok("user: " + newUser.getUsername() + " saved succesfully");
+				sendMail.enviarCorreo(user.getEmail(), mensaje);
 			}
 
 		} catch (Exception e) {
@@ -98,5 +106,13 @@ public class UserService {
 			response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete user: " + id);
 		}
 		return response;
+	}
+
+	public ResponseEntity<String> emailConfimation(User user){
+		// TODO Auto-generated method stub
+		String mensaje = "Successful purchase";
+		sendMail.enviarCorreo(user.getEmail(), mensaje);
+		
+		return null;
 	}
 }

@@ -45,5 +45,10 @@ public class UserController {
 	public ResponseEntity<String> delete(@PathVariable Long id) {
 		return service.delete(id);
 	}
+	
+	@PostMapping("/email")
+	public ResponseEntity<String> emailConfirmation(@RequestBody User user) {
+		return service.emailConfimation(user);
+	}
 
 }
