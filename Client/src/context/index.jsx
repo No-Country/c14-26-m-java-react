@@ -13,7 +13,7 @@ const ContexProvider = ({ children }) => {
     const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')) || "")
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-    const [name, setName] = useState("")
+    const [name, setName] = useState(JSON.parse(localStorage.getItem('name')) || "")
 
     const getAllProducts = async () => {
         const productsAll = await getRequest('/products')
@@ -72,6 +72,7 @@ const ContexProvider = ({ children }) => {
 
     const saveName = (name) => {
         setName(name)
+        localStorage.setItem('name', JSON.stringify(name))
     }
 
 

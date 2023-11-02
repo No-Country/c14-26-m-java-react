@@ -39,6 +39,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('name');
     saveToken(null);
     saveName(null);
     setIsUserMenuOpen(false);
