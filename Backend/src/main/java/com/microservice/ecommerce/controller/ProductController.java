@@ -20,8 +20,11 @@ import com.microservice.ecommerce.model.Product;
 import com.microservice.ecommerce.service.DatosListadoProduct;
 
 import com.microservice.ecommerce.service.ProductService;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
+@CrossOrigin(origins = "${ALLOWED_ORIGINS}")
 @RestController
 @RequestMapping("/product")
 public class ProductController {
