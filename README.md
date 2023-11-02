@@ -1,4 +1,4 @@
-# E-Commerce Web Application 🛒
+![E-Commerce Logo](/Client/public/logo.png)
 
 This is a project for an e-commerce web application developed using React and styled with Tailwind CSS. It utilizes the FakeStore API to display and sell fashion products for men, women, joyeria and electronics. The user interface design was initially created in Figma.
 

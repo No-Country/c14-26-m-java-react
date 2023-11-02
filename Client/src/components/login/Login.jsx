@@ -3,7 +3,7 @@ import Register from '../register/Register'
 import { useState } from 'react';
 import axios from 'axios';
 import { Context } from '../../context';
-import smartlife from '/smartlife.png'
+import logo from '/logo.png'
 
 
 
@@ -46,7 +46,7 @@ const Login = ({ show, onClose, onOpenRegister }) => {
 
           <button onClick={onClose} className="text-right w-full">X</button>
           <div className='flex items-center justify-center'>
-          <img src={smartlife} alt='smartlife' className='h-[150px] w-[180px] '/>
+          <img src={logo} alt='Logo' style={{ width: '200px', padding: '6px' }} /> 
           </div>
           {/* <h1 className='font-bold mt-6 text-center text-3xl'>BrandName</h1> */}
           <p className='text-center text-sm text-custom-gray'>Please sign In</p>
