@@ -115,7 +115,6 @@ const Footer = () => {
                     className="mb-4 p-2 border rounded w-60"
                 />
                 <button className="mb-4 p-2 w-60 bg-blue-500 text-white rounded">Subscribe</button>
-                <p className="text-sm text-custom-gray">Lore imp sum dolor Amit</p>
             </div>
         </div>
     </div>
