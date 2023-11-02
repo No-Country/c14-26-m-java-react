@@ -13,6 +13,7 @@ import login from '/login.png';
 import search from '/search.png';
 import cartt from '/cart.png';
 import menu from '/menu.png';
+import smartlife from '/smartlife.png'
 
 const Navbar = () => {
   // Estados y contexto fusionados
@@ -68,7 +69,7 @@ const Navbar = () => {
             <img src={phone} alt='phone' className='h-[16px] w-[16px] mr-1' />
             <a href="#" className="text-white font-bold text-sm">(225) 555-0118</a>
             <img src={mail} alt='mail' className='h-[16px] w-[16px] mr-1 ml-11 hidden md:block' />
-            <a href="#" className="text-white font-bold text-sm hidden md:block">michelle.rivera@example.com</a>
+            <a href="#" className="text-white font-bold text-sm hidden md:block">Smartlife@example.com</a>
           </div>
 
           <div className=''>
@@ -87,7 +88,8 @@ const Navbar = () => {
       </div>
       <div className='h-[78px] w-full flex justify-between items-center'>
         <div className='flex items-center h-full ml-8 md:justify-center'>
-          <h1 className='font-bold text-[24px] lg:mr-28'>BrandName</h1>
+          <img src={smartlife} alt='smartlife' className='h-[78px] w-[130px]'/>
+          {/* <h1 className='font-bold text-[24px] lg:mr-28'>BrandName</h1> */}
 
           {/* Icono de hamburguesa solo visible en móviles */}
           <div className='lg:hidden mr-5 cursor-pointer' onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
