@@ -11,7 +11,7 @@ import facebook from '/facebook.png';
 import twitter from '/twitter.png';
 import login from '/login.png';
 import search from '/search.png';
-import cart from '/cart.png';
+import cartt from '/cart.png';
 import menu from '/menu.png';
 
 const Navbar = () => {
@@ -203,12 +203,12 @@ const Navbar = () => {
             
           <img src={search} alt='search' className='h-[16] w-[16] mr-8' />
           <div className='relative'>
-            <img src={cart} alt='search' onClick={() => navigate('/cart')} className='h-[16] w-[16] cursor-pointer' />
+            <img src={cartt} alt='search' onClick={() => navigate('/cart')} className='h-[16] w-[16] cursor-pointer' />
             {
-              data.cart.length === 0 ?
+              cart.length === 0 ?
                 null :
                 <div className=' absolute top-[-5px] right-[-5px] rounded-full h-[12px] w-[12px] bg-red-600 text-[8px] flex justify-center items-center text-white'>
-                  <p>{data.cart.length}</p>
+                  <p>{cart.length}</p>
                 </div>
             }
           </div>
