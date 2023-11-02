@@ -16,7 +16,7 @@ import card8 from '/card8.png'
 import ssd from '/ssd.jpg'
 import jewel from '/jewel.jpg'
 import Footer from '../../components/footer/Footer';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { Context } from '../../context';
 import caruselImage from '/carusel.jpg';
 import PropTypes from 'prop-types';
@@ -102,7 +102,9 @@ const Home = () => {
               We know how large objects will act,<br />
               but things on a small scale.
             </p>
+            <Link to="/categories">
             <button className="bg-custom-green mt-[50px] text-white w-56 h-16 mx-auto md:mx-0">Shop Now</button>
+            </Link>
           </div>
         </div>
 
@@ -144,13 +146,13 @@ const Home = () => {
 
           {otherProducts.length > 0 && (
             <div className='flex flex-col items-center justify-center mt-[100px]'>
-              <p className='text-custom-gray text-xl'>HASTA 35% OFF</p>
+              <p className='text-custom-gray text-xl'>Up to 35% OFF</p>
               <div className='flex flex-col items-center justify-center'>
                 <h2 className='font-bold text-2xl mt-[20px]'>
                   BESTSELLER PRODUCTS
                 </h2>
                 <p className='text-custom-gray text-sm text-center '>
-                  CAMPERAS, CHALECOS, TAPADOS, SACOS Y BLAZERS.
+                JACKETS, VESTS, COATS, SUITS, AND BLAZERS.
                 </p>
               </div>
             </div>
