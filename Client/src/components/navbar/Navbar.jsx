@@ -13,7 +13,7 @@ import login from '/login.png';
 import search from '/search.png';
 import cartt from '/cart.png';
 import menu from '/menu.png';
-import smartlife from '/smartlife.png'
+import logo from '/logo.png'
 
 const Navbar = () => {
   // Estados y contexto fusionados
@@ -88,8 +88,7 @@ const Navbar = () => {
       </div>
       <div className='h-[78px] w-full flex justify-between items-center'>
         <div className='flex items-center h-full ml-8 md:justify-center'>
-          <img src={smartlife} alt='smartlife' className='h-[78px] w-[130px]'/>
-          {/* <h1 className='font-bold text-[24px] lg:mr-28'>BrandName</h1> */}
+            <img src={logo} alt='Logo' style={{ width: '200px', padding: '6px' }} /> 
 
           {/* Icono de hamburguesa solo visible en móviles */}
           <div className='lg:hidden mr-5 cursor-pointer' onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
