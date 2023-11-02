@@ -9,6 +9,7 @@ import login from '/login.png'
 import search from '/search.png'
 import cart from '/cart.png'
 import menu from '/menu.png'
+import logo from '/logo.png'
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import Login from "../login/Login"
@@ -62,7 +63,7 @@ const Navbar = () => {
     </div>
     <div className='h-[78px] w-full flex justify-between items-center'>
         <div className='flex items-center h-full ml-8 md:justify-center'>
-            <h1 className='font-bold text-[24px] lg:mr-28'>BrandName</h1>
+            <img src={logo} alt='Logo' style={{ width: '200px', padding: '6px' }} /> 
 
             {/* Icono de hamburguesa solo visible en móviles */}
             <div className='lg:hidden mr-5 cursor-pointer' onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
