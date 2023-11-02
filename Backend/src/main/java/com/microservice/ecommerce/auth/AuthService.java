@@ -3,10 +3,10 @@ package com.microservice.ecommerce.auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.microservice.ecommerce.dto.UserDTO;
 import com.microservice.ecommerce.jwt.JwtService;
 import com.microservice.ecommerce.model.ERole;
 import com.microservice.ecommerce.model.User;
@@ -32,20 +32,21 @@ public class AuthService {
 		this.authenticationManager = authenticationManager;
 	}
 
-	public AuthResponse login(LoginRequest request) {
+	public UserDTO login(LoginRequest request) {
 		authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-		UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+		User user = userRepository.findByUsername(request.getUsername()).orElseThrow();
 		String token = jwtService.getToken(user);
-		AuthResponse authResponse = new AuthResponse();
-		authResponse.setToken(token);
-		String username = user.getUsername();
-		authResponse.setUsername(username);
-		return authResponse;
+		UserDTO userDTO = new UserDTO();
+		userDTO.setToken(token);
+		userDTO.setName(user.getName());
+		userDTO.setLastName(user.getLastName());
+		userDTO.setUsername(user.getUsername());
+		return userDTO;
 
 	}
 
-	public AuthResponse register(RegisterRequest request) { 
+	public UserDTO register(RegisterRequest request) { 
 		 
 		User user = new User();
 		user.setName(request.getName());
@@ -56,10 +57,12 @@ public class AuthService {
 		user.setRole(ERole.USER);
 
 		userRepository.save(user);
-		AuthResponse authResponse = new AuthResponse();
-		authResponse.setToken(jwtService.getToken(user));
-		authResponse.setUsername(user.getUsername());
-		return authResponse;
+		UserDTO userDTO = new UserDTO();
+		userDTO.setToken(jwtService.getToken(user));
+		userDTO.setName(user.getName());
+		userDTO.setLastName(user.getLastName());
+		userDTO.setUsername(user.getUsername());
+		return userDTO;
 	}
 
 }
