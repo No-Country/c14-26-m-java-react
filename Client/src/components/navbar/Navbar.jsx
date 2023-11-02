@@ -25,7 +25,8 @@ const Navbar = () => {
     setIsRegisterOpen, 
     saveName, 
     name,
-    cart 
+    cart,
+    borrarCart 
   } = useContext(Context);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -41,6 +42,7 @@ const Navbar = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('name');
     localStorage.removeItem('cart')
+    borrarCart()
     saveToken(null);
     saveName(null);
     setIsUserMenuOpen(false);
