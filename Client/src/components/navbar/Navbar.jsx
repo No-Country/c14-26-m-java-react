@@ -1,30 +1,47 @@
-import React, { useContext } from 'react'
-import phone from '/phone.png'
-import mail from '/mail.png'
-import instagram from '/instagram.png'
-import youtube from '/youtube.png'
-import facebook from '/facebook.png'
-import twitter from '/twitter.png'
-import login from '/login.png'
-import search from '/search.png'
-import cart from '/cart.png'
-import menu from '/menu.png'
-import { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import Login from "../login/Login"
-import Register from "../register/Register"
-import { Context } from '../../context'
-
+import Login from "../login/Login";
+import Register from "../register/Register";
+import { Context } from '../../context';
+import phone from '/phone.png';
+import mail from '/mail.png';
+import instagram from '/instagram.png';
+import youtube from '/youtube.png';
+import facebook from '/facebook.png';
+import twitter from '/twitter.png';
+import login from '/login.png';
+import search from '/search.png';
+import cart from '/cart.png';
+import menu from '/menu.png';
 
 const Navbar = () => {
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const data = useContext(Context)
-  const navigate = useNavigate()
+  // Estados y contexto fusionados
+  const {
+    token, 
+    saveToken, 
+    isLoginOpen, 
+    setIsLoginOpen, 
+    isRegisterOpen, 
+    setIsRegisterOpen, 
+    saveName, 
+    name,
+    cart 
+  } = useContext(Context);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
+  
   const openLogin = () => {
     setIsLoginOpen(true);
     setIsRegisterOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    saveToken(null);
+    saveName(null);
+    setIsUserMenuOpen(false);
   };
 
   const closeLogin = () => setIsLoginOpen(false);
@@ -36,7 +53,7 @@ const Navbar = () => {
 
   const closeRegister = () => setIsRegisterOpen(false);
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
   return (
     <div className=''>
 
@@ -91,6 +108,50 @@ const Navbar = () => {
             </div>
           )}
 
+
+            {/* Menú para móviles */}
+            {isMobileMenuOpen && (
+                <div className='absolute top-[78px] left-0 w-full bg-white flex flex-col p-5 lg:hidden items-center'>
+                  <Link to= "/">
+                    <a href="/" className="text-custom-gray font-bold text-xl mb-3">Home</a>
+                  </Link>
+                  <Link to="/categories">
+                    <a href="#" className="text-custom-gray font-bold text-xl mb-3">Shop</a>
+                  </Link>
+                    <a href="#" className="text-custom-gray font-bold text-xl mb-3">About</a>
+                    <a href="#" className="text-custom-gray font-bold text-xl mb-3">Blog</a>
+                    <a href="#" className="text-custom-gray font-bold text-xl mb-3" >Contact</a>
+                    {
+    token ? (
+        <div className="relative">
+            <button 
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)} 
+                className='text-custom-sky-blue mr-2 font-bold'
+            >
+                {name}
+            </button>
+            {isUserMenuOpen && (
+                <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
+                    <a 
+                        href="#" 
+                        onClick={handleLogout} 
+                        className="block px-4 py-2 text-sm font-bold text-custom-sky-blue hover:bg-gray-100"
+                    >
+                        Log out
+                    </a>
+                </div>
+            )}
+        </div>
+    ) : (
+        <button onClick={openLogin} className='text-custom-sky-blue mr-8 font-bold'>Login / register</button>
+    )
+}
+                    <Login show={isLoginOpen} onClose={closeLogin} onOpenRegister={openRegister} />
+                    <Register show={isRegisterOpen} onClose={closeRegister} onOpenLogin={openLogin} />
+                </div>
+            )}
+
+ 
           {/* Menú para escritorio */}
           <div className='hidden lg:flex'>
             <Link to="/">
@@ -109,10 +170,37 @@ const Navbar = () => {
           </div>
         </div>
         <div className='hidden lg:flex items-center mr-16'>
-          <img src={login} alt='login' className='h-[12] w-[12] mr-1' />
-          <button onClick={openLogin} className='text-custom-sky-blue mr-8 font-bold'>Login / register</button>
-          <Login show={isLoginOpen} onClose={closeLogin} onOpenRegister={openRegister} />
-          <Register show={isRegisterOpen} onClose={closeRegister} onOpenLogin={openLogin} />
+
+            <img src={login} alt='login' className='h-[12] w-[12] mr-1'/>
+            {
+    token ? (
+        <div className="relative">
+            <button 
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)} 
+                className='text-custom-sky-blue mr-2 font-bold'
+            >
+                {name}
+            </button>
+            {isUserMenuOpen && (
+                <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
+                    <a 
+                        href="#" 
+                        onClick={handleLogout} 
+                        className="block px-4 py-2 text-sm font-bold text-custom-sky-blue hover:bg-gray-100"
+                    >
+                        Log out
+                    </a>
+                </div>
+            )}
+        </div>
+    ) : (
+        <button onClick={openLogin} className='text-custom-sky-blue mr-8 font-bold'>Login / register</button>
+    )
+}
+            
+            <Login show={isLoginOpen} onClose={closeLogin} onOpenRegister={openRegister} />
+            <Register show={isRegisterOpen} onClose={closeRegister} onOpenLogin={openLogin}/>
+            
           <img src={search} alt='search' className='h-[16] w-[16] mr-8' />
           <div className='relative'>
             <img src={cart} alt='search' onClick={() => navigate('/cart')} className='h-[16] w-[16] cursor-pointer' />
@@ -124,6 +212,7 @@ const Navbar = () => {
                 </div>
             }
           </div>
+
         </div>
       </div>
     </div>

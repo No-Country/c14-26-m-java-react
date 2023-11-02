@@ -1,21 +1,43 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 import Login from '../login/Login';
+import { Context } from '../../context';
+import axios from 'axios';
 
 const Register = ({ show, onClose, onOpenLogin}) => {
+    const {token, saveToken,isLoginOpen, setIsLoginOpen, isRegisterOpen, setIsRegisterOpen} = useContext(Context)
   if (!show) {
     return null;
   }
 
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  
+  
   
   const handleLoginOpen = () => {
     onOpenLogin()
     onClose()
   };
 
+  const postRegister = (e) => {
+    e.preventDefault()
+    const data = {
+      name: e.target.name.value,
+      lastName: e.target.lastName.value,  
+      username: e.target.username.value,
+      password: e.target.password.value,
+      email: e.target.email.value
+    }
+
+ 
+    axios.post('https://ecommerce-nocountry.fly.dev/auth/register', data)
+    .then(res => {saveToken(res.data.token)
+    setIsRegisterOpen(false)
+    })
+  
+    .catch(err=> console.log(err))
+  }
   return (
+    <form onSubmit={postRegister}>
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">
         <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
       <div className="bg-white p-6 rounded shadow-lg w-full md:w-[600px] h-[850px] z-10">
@@ -30,6 +52,7 @@ const Register = ({ show, onClose, onOpenLogin}) => {
                     className="bg-transparent border-none outline-none w-full h-[47px] text-gray-600 placeholder-gray-400"
                     type="text"
                     placeholder="John"
+                    name='name'
                 />
             </div>
         </div>
@@ -40,6 +63,7 @@ const Register = ({ show, onClose, onOpenLogin}) => {
                     className="bg-transparent border-none outline-none w-full h-[47px] text-gray-600 placeholder-gray-400"
                     type="text"
                     placeholder="Doe"
+                    name='lastName'
                 />
             </div>
         </div>
@@ -50,6 +74,7 @@ const Register = ({ show, onClose, onOpenLogin}) => {
                     className="bg-transparent border-none outline-none w-full h-[47px] text-gray-600 placeholder-gray-400"
                     type="text"
                     placeholder="your@email.com"
+                    name='email'
                 />
             </div>
         </div>
@@ -60,6 +85,7 @@ const Register = ({ show, onClose, onOpenLogin}) => {
                     className="bg-transparent border-none outline-none w-full h-[47px] text-gray-600 placeholder-gray-400"
                     type="text"
                     placeholder=" Johndoe"
+                    name='username'
                 />
             </div>
         </div>
@@ -70,11 +96,12 @@ const Register = ({ show, onClose, onOpenLogin}) => {
                     className="bg-transparent border-none outline-none w-full h-[47px] text-gray-600 placeholder-gray-400"
                     type="text"
                     placeholder=""
+                    name='password'
                 />
             </div>
         </div>
         <div className='w-[372px]  md:ml-[80px] mt-[20px]'>
-        <button className='w-full rounded h-[46px] text-white font-bold  bg-sky-500 mt-[10px]	'>Sign Up</button>
+        <button type='submit' className='w-full rounded h-[46px] text-white font-bold  bg-sky-500 mt-[10px]	'>Sign Up</button>
         </div>
         
         <div className='w-[372px]  md:ml-[80px] mt-[40px] text-center'>
@@ -83,6 +110,7 @@ const Register = ({ show, onClose, onOpenLogin}) => {
         </div>
       </div>
     </div>
+    </form>
   );
 }
 

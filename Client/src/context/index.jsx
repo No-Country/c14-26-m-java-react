@@ -10,6 +10,10 @@ const ContexProvider = ({ children }) => {
     const [categories, SetCategories] = useState([])
     const [categoryProd, setCategoryProd] = useState([])
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || [])
+    const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')) || "")
+    const [isLoginOpen, setIsLoginOpen] = useState(false);
+    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+    const [name, setName] = useState("")
 
     const getAllProducts = async () => {
         const productsAll = await getRequest('/products')
@@ -60,10 +64,19 @@ const ContexProvider = ({ children }) => {
 
         return total;
     };
+    
+    const saveToken = (token) => {
+        setToken(token)
+        localStorage.setItem('token', JSON.stringify(token))
+    }
+
+    const saveName = (name) => {
+        setName(name)
+    }
 
 
     return (
-        <Context.Provider value={{ products, getAllProducts, categories, getAllCategories, categoryProd, getProductsFromCategory, getProductByID, product, addCart, cart, updateCartItem, calculateCartTotal, borrarCart }}>
+        <Context.Provider value={{ products, getAllProducts, categories, getAllCategories, categoryProd, getProductsFromCategory, getProductByID, product, addCart, cart, updateCartItem, calculateCartTotal, borrarCart, saveToken,token,isLoginOpen, setIsLoginOpen, isRegisterOpen, setIsRegisterOpen, saveName,name }}>
             {children}
         </Context.Provider>
     )
