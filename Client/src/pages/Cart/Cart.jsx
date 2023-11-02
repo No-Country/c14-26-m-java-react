@@ -3,6 +3,7 @@ import Navigation from '../../components/navigation/Navigation';
 import { Context } from '../../context';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 
 const Cart = () => {
   const { cart, updateCartItem, calculateCartTotal, borrarCart } = useContext(Context);
@@ -25,7 +26,21 @@ const Cart = () => {
     window.open(url, '_blank');
   }
 
+  const removeCart = () => {
+    borrarCart()
+    localStorage.removeItem('cart')
+  }
+
   const handleAddToCart = () => {
+
+    if (cart.length === 0) {
+      Swal.fire(
+        'Warning!',
+        'Your cart is empty.',
+        'error'
+      )
+      return
+    }
 
     Swal.fire({
       title: 'You want to confirm the purchase?',
@@ -43,17 +58,33 @@ const Cart = () => {
           'success'
         )
 
-        compartirComprasEnWhatsApp('+51916804077')
-        borrarCart()
-        localStorage.removeItem('cart')
-        navigate('/')
+        // compartirComprasEnWhatsApp('+51916804077')
+        axios.post('https://pago-stripe.vercel.app/create-checkout-session', cart)
+          .then(res => {
+
+            borrarCart()
+            localStorage.removeItem('cart')
+            navigate('/')
+            window.location.href = `${res.data.url}`
+
+
+          })
+          .catch(err => {
+            console.log(err);
+            Swal.fire(
+              'Warning!',
+              'eror server.',
+              'error'
+            )
+          })
+
       }
     })
 
   };
 
 
-
+  console.log(cart);
   return (
     <div>
 
@@ -64,7 +95,10 @@ const Cart = () => {
           <div className="flex">
             {/* Información del Producto Seleccionado / izquierda */}
             <div className="w-2/3 p-2">
+
               <h2 className="text-2xl font-bold mb-4 border-b border-gray-300 pb-8">Your Cart</h2>
+
+
 
               {
 
@@ -104,14 +138,16 @@ const Cart = () => {
               }
 
             </div>
+
             {/* Resumen del Carrito / derecha */}
             <div className="w-1/3 p-4 mt-[-4] mx-auto text-center">
 
               <div className="p-4 rounded-md shadow-md">
+                <button onClick={removeCart} className=' bg-red-500 text-white px-3 rounded-lg py-2 mb-5'>Remove Cart All</button>
                 <p>Subtotal: {totalt}</p>
                 <p>Discount: $0.00</p>
                 <p>Shipping Costs: $0.00</p>
-                <button className="bg-blue-500 text-white p-2 mt-4 rounded-md w-full" onClick={handleAddToCart}>Checkout: {totalt}</button>
+                <button className="bg-blue-500 text-white p-2 mt-4 rounded-md w-full" onClick={handleAddToCart}>Checkout: {totalt.toFixed(2)}</button>
               </div>
 
             </div>
